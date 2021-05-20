@@ -11,6 +11,7 @@ describe('Test #1', () => {
         cy.visit('localhost:3000')
 
         cy.get('input[name=name]').type('name')
+        cy.get('input[name=name]').should('have.value','name')
         cy.get('input[name=email]').type('mail@mail.com')
         cy.get('input[name=password]').type('password')
     })
