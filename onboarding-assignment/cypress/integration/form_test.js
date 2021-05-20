@@ -10,15 +10,26 @@ describe('Test #1', () => {
     it('Types names into field', () => {
         cy.visit('localhost:3000')
 
-        cy.get('name').type('name')
-        cy.get('EMail').type('mail@mail.com')
-        cy.get('Password').type('password')
+        cy.get('input[name=name]').type('name')
+        cy.get('input[name=email]').type('mail@mail.com')
+        cy.get('input[name=password]').type('password')
     })
 })
 
 describe('Test #2', () => {
     it('Verifies user can submit form data', () => {
-        cy.get('checkbox').click()
-
+        cy.get('input[name=tos]').click()
     })
+})
+
+describe('Test #3', () => {
+    it('Verify user form creates user', () => {
+        cy.get('button').click()
+        cy.get('div[class=UserCard]')
+        .contains('name')
+        .parent().contains('mail@mail.com')
+        .parent().contains('password')
+        .parent().contains('has agreed to ToS')
+    })
+
 })
