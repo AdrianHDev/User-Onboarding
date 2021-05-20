@@ -48,21 +48,21 @@ const Form = (props) => {
             <br/>
             <button onClick={ev => {
                 ev.preventDefault();
-                try {
-                    userSchema.validateSync(user)
-                } catch (e) {
-                    setErrMessages(e);
-                }
-                if (errMessages.length === 0) {
-                    axios.post('https://reqres.in/api/users', user).then(res =>{
-                        console.log(res)
-                        setUsers([...users, res.data])
+                setErrMessages([]);
+                userSchema.validate(user)
+                .catch (e => {
+                    setErrMessages(e.errors);
+                    return e.errors;
+                }).then(result => {
+                    if (!Array.isArray(result)) {
+                        axios.post('https://reqres.in/api/users', user).then(res =>{
+                            setUsers([...users, res.data])
                 })
-                };
+                }});
 
             }}>Add User!</button>
-            <p className="errors">{errMessages.map(msg => {
-                return (<div className='errorMessage'>{msg}</div>)
+            <p className="errors">{errMessages.map((msg, ind) => {
+                return (<div key={ind} className='errorMessage'>{msg}</div>)
             })}</p>
         </form>
     )
