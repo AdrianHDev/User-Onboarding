@@ -7,7 +7,18 @@
 
 
 describe('Test #1', () => {
-    it('Types name into name field', () => {
-        cy.visit('localhost:')
+    it('Types names into field', () => {
+        cy.visit('localhost:3000')
+
+        cy.get('name').type('name')
+        cy.get('EMail').type('mail@mail.com')
+        cy.get('Password').type('password')
+    })
+})
+
+describe('Test #2', () => {
+    it('Verifies user can submit form data', () => {
+        cy.get('checkbox').click()
+
     })
 })
