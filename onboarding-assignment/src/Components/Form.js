@@ -57,6 +57,7 @@ const Form = (props) => {
                     if (!Array.isArray(result)) {
                         axios.post('https://reqres.in/api/users', user).then(res =>{
                             setUsers([...users, res.data])
+                            setUser(initialState);
                 })
                 }});
 

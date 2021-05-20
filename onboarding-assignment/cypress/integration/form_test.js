@@ -34,3 +34,12 @@ describe('Test #3', () => {
     })
 
 })
+
+describe('Test #4', () => {
+    it('Check for form validation', () => {
+        cy.visit('localhost:3000')
+
+        cy.get('button').click()
+        cy.get('div[class=UserCard]').should('not.exist');
+    })
+})
